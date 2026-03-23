@@ -1,0 +1,129 @@
+Microsoft Windows [Version 10.0.26200.7922]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\ACER>mongosh
+Current Mongosh Log ID: 69c0a3ebb39470d03a114029
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.1
+MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017
+
+C:\Users\ACER>mongosh "mongodb+srv://cluster0.wpprrby.mongodb.net/" --apiVersion 1 --username manandharbinita32_db_user
+Enter password: ***********
+Current Mongosh Log ID: 69c0a3f3cbdc78215a114029
+Connecting to:          mongodb+srv://<credentials>@cluster0.wpprrby.mongodb.net/?appName=mongosh+2.8.1
+Using MongoDB:          8.0.20 (API Version 1)
+Using Mongosh:          2.8.1
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+Atlas atlas-wqf45e-shard-0 [primary] test> show dbs
+Pcps            8.00 KiB
+sample_mflix  124.75 MiB
+admin         356.00 KiB
+local           6.37 GiB
+Atlas atlas-wqf45e-shard-0 [primary] test> use test
+already on db test
+Atlas atlas-wqf45e-shard-0 [primary] test> db student.inseretMany([ name : "Binita", age:18, grade:"A"}])
+Uncaught:
+SyntaxError: Missing semicolon. (1:2)
+
+> 1 | db student.inseretMany([ name : "Binita", age:18, grade:"A"}])
+    |   ^
+  2 |
+
+Atlas atlas-wqf45e-shard-0 [primary] test> use test
+already on db test
+Atlas atlas-wqf45e-shard-0 [primary] test> db student.insertMany([{ name:"Binita", age:18, grade:"A"}])
+Uncaught:
+SyntaxError: Missing semicolon. (1:2)
+
+> 1 | db student.insertMany([{ name:"Binita", age:18, grade:"A"}])
+    |   ^
+  2 |
+
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.insertMany([{ name:"Binita",age:18, grade:"A"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('69c0a5fdcbdc78215a11402a') }
+}
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.find().pretty
+[Function: pretty] {
+  returnType: 'this',
+  serverVersions: [ '0.0.0', '999.999.999' ],
+  apiVersions: [ 0, Infinity ],
+  topologies: [ 'ReplSet', 'Standalone', 'Sharded', 'LoadBalanced' ],
+  returnsPromise: false,
+  deprecated: false,
+  platforms: [ 'Compass', 'Browser', 'CLI' ],
+  isDirectShellCommand: false,
+  acceptsRawInput: false,
+  shellCommandCompleter: undefined,
+  newShellCommandCompleter: undefined,
+  help: [Function (anonymous)] Help
+}
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.find().pretty()
+[
+  {
+    _id: ObjectId('69c0a5fdcbdc78215a11402a'),
+    name: 'Binita',
+    age: 18,
+    grade: 'A'
+  }
+]
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.find({age: {$gt:20}}).pretty()
+
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.find({grade: "A" }).pretty()
+[
+  {
+    _id: ObjectId('69c0a5fdcbdc78215a11402a'),
+    name: 'Binita',
+    age: 18,
+    grade: 'A'
+  }
+]
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.find({name:"Binita"}).pretty()
+[
+  {
+    _id: ObjectId('69c0a5fdcbdc78215a11402a'),
+    name: 'Binita',
+    age: 18,
+    grade: 'A'
+  }
+]
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.updateOne({name:"Binita"}, {$set : (grade: "g"}})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:53)
+
+> 1 | db.students.updateOne({name:"Binita"}, {$set : (grade: "g"}})
+    |                                                      ^
+  2 |
+
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.updateOne({name:"Binita"}, {$set : {grade: "g"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.deleteOne({name: "Binita"})
+{ acknowledged: true, deletedCount: 1 }
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.find().pretty()
+
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.insertMany([{ name: "Binita", age: 19, grade : "A"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('69c0a979cbdc78215a11402b') }
+}
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.insertMany([{ name: "Alu", age: 20, grade : "B"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('69c0a9aecbdc78215a11402c') }
+}
+Atlas atlas-wqf45e-shard-0 [primary] test> db.students.countDocuments()
+2
+Atlas atlas-wqf45e-shard-0 [primary] test> mongosh
+ReferenceError: mongosh is not defined
+Atlas atlas-wqf45e-shard-0 [primary] test>
+
+
+
